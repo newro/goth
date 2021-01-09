@@ -112,7 +112,8 @@ func (p *Provider) FetchUser(session goth.Session) (goth.User, error) {
 	}
 
 	u := struct {
-		ID         int `json:"id"`
+		ID         int    `json:"id"`
+		Email      string `json:"email"`
 		Properties struct {
 			Nickname       string `json:"nickname"`
 			ThumbnailImage string `json:"thumbnail_image"`
@@ -129,6 +130,7 @@ func (p *Provider) FetchUser(session goth.Session) (goth.User, error) {
 	user.NickName = u.Properties.Nickname
 	user.AvatarURL = u.Properties.ProfileImage
 	user.UserID = id
+	user.Email = u.Email
 	return user, err
 }
 
